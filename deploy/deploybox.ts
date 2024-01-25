@@ -1,11 +1,6 @@
-import { Wallet } from "zksync-ethers";
 import { getWallet } from "./utils";
-// import { Deployer } from "@matterlabs/hardhat-zksync-deploy";
-
 import * as hre from "hardhat";
 import { Deployer } from "@matterlabs/hardhat-zksync-deploy";
-
-// import * as hre from "hardhat";
 
 export default async function () {
   const contractName = "Box";

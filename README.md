@@ -6,8 +6,8 @@ This project was scaffolded with [zksync-cli](https://github.com/matter-labs/zks
 - `echo WALLET_PRIVATE_KEY=7726827caac94a7f9e1b160f7ea819f172f7b6f9d2a97f992c38edeab82d4110 > .env`: create a local rich wallet config
 - `era_test_node run`: Run the local node.
 - `yarn compile`: Compiles the contracts
-- `yarn deploy`: Interacts with the deployed contract using `/deploy/interact.ts`.
-- `yarn deploy:box`: Tests the contracts.
+- `yarn deploy`: Deploys sample non upgradable contract
+- `yarn deploy:box`: Deploys transparent pattern upgrdadable contract [FAILS]
 
 
 ## Error
