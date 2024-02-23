@@ -1,13 +1,10 @@
-# zkSync Send Raw transactions using ABI encoded data
+# zkSync: send Raw transactions using ABI encoded data
 
 ## Goal:
-Call a contract method in hardhat tests using abi encoded transaction data generated from go without extracting function selector.
+Call a contract method in hardhat tests using abi encoded transaction data generated from `go` without extracting function selector. For the purposes of this demonstration, we will use an online tool to get encoded transaction data.
 
 #### Step 1: Extract abi encoded txData using go
-We have some transactions that can interact with our smart-contract using go-ethereum. For the purposes of reproducing this error, we do it using an online tool.
-
-
-Go to https://abi.hashex.org/, paste the abi array, pass a param and get the encoded data
+We have some transactions that can interact with our smart-contract using go-ethereum. For the purposes of reproducing this error, we do the steps that go does using an online tool. Go to https://abi.hashex.org/, paste the abi array, pass a param and get the encoded data
 ```
   [
   {
@@ -52,6 +49,9 @@ Go to https://abi.hashex.org/, paste the abi array, pass a param and get the enc
 
 Set a param for the message and get encoded data. 
 
+![image](https://github.com/alaukiknpant/upgradable-contracts-zk/assets/40881096/c8304254-504e-413f-bb29-19321b61394f)
+
+
 
 #### Step 2: Use the txData to call the smart contract in hardhat tests
 We then want to make a raw transaction using sendTransaction from zksync-ethers. 
@@ -60,7 +60,7 @@ Problem:
 CallException
 
 
-## Steps
+## How to reproduce
 - `echo WALLET_PRIVATE_KEY=7726827caac94a7f9e1b160f7ea819f172f7b6f9d2a97f992c38edeab82d4110 > .env`: create a local rich wallet config
 - `era_test_node run`: Run the local node.
 - `yarn compile`: Compiles the contracts
