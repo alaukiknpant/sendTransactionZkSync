@@ -1,9 +1,10 @@
 import * as hre from "hardhat";
 import { getWallet } from "./utils";
 import { ethers } from "ethers";
+import { Provider } from "zksync-ethers";
 
 // Address of the contract to interact with
-const CONTRACT_ADDRESS = "";
+const CONTRACT_ADDRESS = "0x111C3E89Ce80e62EE88318C2804920D4c96f92bb";
 if (!CONTRACT_ADDRESS) throw "⛔️ Provide address of the contract to interact with!";
 
 // An example of a script to interact with the contract
@@ -33,4 +34,31 @@ export default async function () {
 
   // Read message after transaction
   console.log(`The message now is: ${await contract.greet()}`);
+
+
+  var w1 = getWallet()
+
+  const encodedData = "0x0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000d6865657920686565792068657900000000000000000000000000000000000000"
+  var tx: ethers.TransactionRequest = {
+    // type: utils.EIP712_TX_TYPE,
+    to: CONTRACT_ADDRESS,
+    gasLimit: 2100000,
+    data: encodedData,
+  }
+  w1 = w1.connect(getProvider())
+  const resp = await w1.sendTransaction(tx)
+  console.log("waiting")
+  await resp.wait()
+}
+
+
+export const getProvider = () => {
+  const rpcUrl = hre.network.config.url
+  if (!rpcUrl)
+    throw `⛔️ RPC URL wasn't found in "${hre.network.name}"! Please add a "url" field to the network config in hardhat.config.ts`
+
+  // Initialize zkSync Provider
+  const provider = new Provider(rpcUrl)
+
+  return provider
 }
